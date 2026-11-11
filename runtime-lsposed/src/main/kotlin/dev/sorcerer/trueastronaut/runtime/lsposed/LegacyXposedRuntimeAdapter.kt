@@ -101,19 +101,33 @@ class LegacyXposedRuntimeAdapter(
         else -> Class.forName(name, false, classLoader)
     }
 
-    private fun XC_MethodHook.MethodHookParam.toNeutralInvocation(): HookInvocation =
-        object : HookInvocation {
-            override val receiver: Any? get() = this@toNeutralInvocation.thisObject
-            override val arguments: MutableList<Any?> =
-                this@toNeutralInvocation.args.toMutableList()
+    private fun XC_MethodHook.MethodHookParam.toNeutralInvocation(): HookInvocation {
+        val hookParam = this
+        val argumentView = object : AbstractMutableList<Any?>() {
+            override val size: Int
+                get() = hookParam.args.size
+
+            override fun get(index: Int): Any? = hookParam.args[index]
+
+            override fun set(index: Int, element: Any?): Any? {
+                val previous = hookParam.args[index]
+                hookParam.args[index] = element
+                return previous
+            }
+        }
+
+        return object : HookInvocation {
+            override val receiver: Any? get() = hookParam.thisObject
+            override val arguments: MutableList<Any?> = argumentView
             override var result: Any?
-                get() = this@toNeutralInvocation.result
-                set(value) { this@toNeutralInvocation.result = value }
+                get() = hookParam.result
+                set(value) { hookParam.result = value }
             override var throwable: Throwable?
-                get() = this@toNeutralInvocation.throwable
+                get() = hookParam.throwable
                 set(value) {
-                    if (value == null) this@toNeutralInvocation.setResult(this@toNeutralInvocation.result)
-                    else this@toNeutralInvocation.setThrowable(value)
+                    if (value == null) hookParam.setResult(hookParam.result)
+                    else hookParam.setThrowable(value)
                 }
         }
+    }
 }
