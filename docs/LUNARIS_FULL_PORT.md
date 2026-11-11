@@ -55,13 +55,13 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 - [x] Verify the GitHub Actions import workflow and imported file counts.
 - [x] Add a source-backed catalog covering all Settings screens and feature groups.
 - [x] Pin ProjectInfinity-X manifest branch `16-QPR1` and vendor baseline commit `f20a3edc17f69c04d33ad9c5015343bcf9e4ec46`.
-- [x] Identify `frameworks/base` and `packages/apps/Settings` as manifest-declared Codeberg LFS-dump projects on revision `16-QPR1`.
-- [x] Confirm the QPR1 manifest snippet uses the `LFS-dump` Codeberg remote for `frameworks/base` and `packages/apps/Settings` at revision `16-QPR1`.
-- [ ] Resolve and pin those Codeberg repositories: the GitHub connector cannot read the Codeberg host, so exact source SHAs remain unverified.
+- [x] Inspect the actual ProjectInfinity-X manifest branch `16-QPR1`.
+- [x] Verify that the `frameworks/base` and `packages/apps/Settings` entries in `default.xml` are commented out; the manifest does not declare the claimed Codeberg `LFS-dump` remote for these paths.
+- [ ] Identify the actual target source repositories/revisions supplying `frameworks/base`, Settings, SystemUI and SettingsLib for the user's InfinityX GSI build. Do not assume the Codeberg repository names or SHAs.
 - [x] Inspect the supplied X6831 Treble overlay reference (`Doze-off/vendor_hardware_overlay`, `Infinix/Hot30`).
 - [x] Record QPR1 source map and clarify target `packages/SystemUI` is in the manifest-declared `frameworks/base` project, not the separate shared SystemUI libraries repository.
 - [ ] Confirm the X6831-specific device tree/kernel/vendor baseline used for the current GSI build.
-- [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2. The ProjectInfinity-X manifest and vendor/SystemUI GitHub refs are pinned; the Codeberg framework/Settings projects are not publicly readable by the CI runner.
+- [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2. The current companion-app repository does not contain these target platform trees, and the manifest inspection did not establish their source.
 
 ### Phase 1 — Platform dependency map
 - [ ] Enumerate every Lunaris Settings source/resource reference and its target framework symbol.
@@ -94,4 +94,4 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 
 ## Current status
 
-The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The ProjectInfinity-X QPR1 manifest/vendor/SystemUI refs are identified, and the legacy Hot 30 overlay has been inventoried. Remaining blockers: exact Codeberg LFS SHAs for `frameworks/base` and `packages/apps/Settings`, plus the device-tree/kernel revisions used for the current GSI.
+The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The ProjectInfinity-X QPR1 manifest/vendor/SystemUI refs are identified, and the legacy Hot 30 overlay has been inventoried. Remaining blockers: the actual target platform source repositories and exact revisions for `frameworks/base`, Settings/SystemUI and SettingsLib, plus the device-tree/kernel revisions used for the current GSI. The earlier Codeberg LFS-dump attribution was not substantiated by the inspected QPR1 manifest and has been removed.
