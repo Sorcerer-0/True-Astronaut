@@ -43,8 +43,11 @@ jobs:
           resolve_ref() {
             local repo="$1" ref="$2"
             local output status sha
-            output="$(git ls-remote "https://codeberg.org/LFS-dump/${repo}.git" "refs/heads/${ref}" 2>&1)"
-            status=$?
+            if output="$(git ls-remote "https://codeberg.org/LFS-dump/${repo}.git" "refs/heads/${ref}" 2>&1)"; then
+              status=0
+            else
+              status=$?
+            fi
             sha="$(printf '%s\n' "$output" | awk 'NR==1 && $1 ~ /^[0-9a-f]{40}$/ {print $1}')"
             if [[ $status -ne 0 || -z "$sha" ]]; then
               echo "::warning::Cannot resolve Codeberg LFS-dump/${repo} branch ${ref} from public CI. The repository may be private, unavailable, or differently named. Details: ${output}"
