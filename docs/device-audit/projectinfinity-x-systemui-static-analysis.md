@@ -1,6 +1,6 @@
 # SystemUI APK static inspection — ProjectInfinity-X / X6831
 
-Source artifact: user-supplied `SystemUI.apk` (51,341,479 bytes; SHA-256 to be recorded locally if needed). This note records static DEX/resource-table observations only. It does not claim runtime behavior or identify the exact settings provider until verified on-device.
+Source artifact: user-supplied `SystemUI.apk` (51,341,479 bytes; SHA-256 `e73d97af78dc7e68c01c06406d0f082c065fb21174d8a181f3111cbfc08144a4`). This note records static DEX/resource-table observations only. It does not claim runtime behavior or identify the exact settings provider until verified on-device.
 
 ## Confirmed DEX layout
 
