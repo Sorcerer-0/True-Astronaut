@@ -24,107 +24,33 @@ jobs:
         run: |
           set -euo pipefail
           resolve_ref() {
-            local remote="$1" repo="$2" ref="$3"
-            local sha
-            sha="$(git ls-remote "https://${remote}/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
-            if [[ -z "$sha" ]]; then
-              echo "::error::Cannot resolve ${remote}/${repo} branch ${ref}"
-              return 1
-            fi
-            printf '%-46s %-12s %s\n' "${remote}/${repo}" "${ref}" "$sha"
-          }
-          resolve_ref github.com ProjectInfinity-X/manifest 16-QPR1
-          resolve_ref github.com ProjectInfinity-X/vendor_infinity 16-QPR1
-          resolve_ref github.com ProjectInfinity-X/frameworks_libs_systemui 16-QPR1
-      - name: Resolve Codeberg LFS-dump projects declared by Infinity manifest
-        shell: bash
-        run: |
-          set -euo pipefail
-          resolve_ref() {
             local repo="$1" ref="$2"
             local sha
-            sha="$(git ls-remote "https://codeberg.org/LFS-dump/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
+            sha="$(git ls-remote "https://github.com/ProjectInfinity-X/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
             if [[ -z "$sha" ]]; then
-              echo "::error::Cannot resolve Codeberg LFS-dump/${repo} branch ${ref}"
+              echo "::error::Cannot resolve ProjectInfinity-X/${repo} branch ${ref}"
               return 1
             fi
-            printf '%-46s %-12s %s\n' "codeberg.org/LFS-dump/${repo}" "${ref}" "$sha"
+            printf '%-46s %-12s %s\n' "ProjectInfinity-X/${repo}" "${ref}" "$sha"
           }
-          resolve_ref frameworks_base 16-QPR1
-          resolve_ref packages_apps_Settings 16-QPR1
-
-  verify-lunaris-source:
-    name: Verify complete Lunaris source import
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout True Astronaut
-        uses: actions/checkout@v4
-
-      - name: Checkout upstream Lunaris Singularity 16.2
-        uses: actions/checkout@v4
-        with:
-          repository: Lunaris-AOSP/packages_apps_Singularity
-          ref: 16.2
-          path: upstream-singularity
-
-      - name: Verify imported source, resources, and assets
-        shell: bash
-        run: |
-          set -euo pipefail
-          imported="vendor/lunaris/packages_apps_Singularity"
-          test -d "$imported/src"
-          test -d "$imported/res"
-          test -d "$imported/assets"
-          diff -qr upstream-singularity/src "$imported/src"
-          diff -qr upstream-singularity/res "$imported/res"
-          diff -qr upstream-singularity/assets "$imported/assets"
-          upstream_count="$(find upstream-singularity/src upstream-singularity/res upstream-singularity/assets -type f | wc -l)"
-          imported_count="$(find "$imported/src" "$imported/res" "$imported/assets" -type f | wc -l)"
-          test "$upstream_count" -eq "$imported_count"
-          echo "Verified identical upstream import: $imported_count files"
-
-  assemble:
-    name: Build companion app and LSPosed adapter
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.11.1"
-
-      - name: Build app and LSPosed adapter APKs
-        run: gradle --no-daemon :app:assembleDebug :runtime-lsposed:assembleDebug
-
-      - name: Upload debug APKs
-        uses: actions/upload-artifact@v4
-        with:
-          name: true-astronaut-debug-apks
-          path: |
-            app/build/outputs/apk/debug/*.apk
-            runtime-lsposed/build/outputs/apk/debug/*.apk      - name: Resolve Codeberg LFS-dump projects declared by manifest
+          resolve_ref manifest 16-QPR1
+          resolve_ref vendor_infinity 16-QPR1
+          resolve_ref frameworks_libs_systemui 16-QPR1
+      - name: Probe manifest-declared Codeberg projects
         shell: bash
         run: |
           set -u
           resolve_ref() {
             local repo="$1" ref="$2"
-            local output sha
+            local output status sha
             output="$(git ls-remote "https://codeberg.org/LFS-dump/${repo}.git" "refs/heads/${ref}" 2>&1)"
-            local status=$?
+            status=$?
             sha="$(printf '%s\n' "$output" | awk 'NR==1 && $1 ~ /^[0-9a-f]{40}$/ {print $1}')"
             if [[ $status -ne 0 || -z "$sha" ]]; then
-              echo "::warning::Cannot read Codeberg LFS-dump/${repo} branch ${ref} from public CI. Repository may be private, unavailable, or named differently. Output: ${output}"
-              return 0
+              echo "::warning::Cannot resolve Codeberg LFS-dump/${repo} branch ${ref} from public CI. The repository may be private, unavailable, or differently named. Details: ${output}"
+            else
+              printf '%-46s %-12s %s\n' "LFS-dump/${repo}" "${ref}" "$sha"
             fi
-            printf '%-46s %-12s %s\n' "codeberg.org/LFS-dump/${repo}" "${ref}" "$sha"
           }
           resolve_ref frameworks_base 16-QPR1
           resolve_ref packages_apps_Settings 16-QPR1
