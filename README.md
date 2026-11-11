@@ -52,9 +52,15 @@ The audit's reported fingerprint strings still identify the underlying Infinix A
 
 ## Source baseline
 
-- [Lunaris Singularity 16.2](https://github.com/Lunaris-AOSP/packages_apps_Singularity/tree/16.2)
-- [Lunaris Android 16 manifest](https://github.com/Lunaris-AOSP/android/tree/16.2)
-- [Android 16 / QPR release notes](https://source.android.com/docs/whatsnew/android-16-release)
+- Target ROM manifest: [ProjectInfinity-X/manifest, branch 16-QPR1](https://github.com/ProjectInfinity-X/manifest/tree/16-QPR1)
+- Target ROM manifest commit: `91a7f7a4a8ff33ad0460c93541e9a0b5e4ecf8f8`
+- Target vendor repository: [ProjectInfinity-X/vendor_infinity, branch 16-QPR1](https://github.com/ProjectInfinity-X/vendor_infinity/tree/16-QPR1)
+- Target vendor commit: `f20a3edc17f69c04d33ad9c5015343bcf9e4ec46`
+- Target SystemUI shared libraries: [ProjectInfinity-X/frameworks_libs_systemui, branch 16-QPR1](https://github.com/ProjectInfinity-X/frameworks_libs_systemui/tree/16-QPR1)
+- Target SystemUI shared libraries commit: `9ae1abbda48666f38de85b595ab908a18947767f`
+- Target manifest snippet declares `frameworks/base` and `packages/apps/Settings` from the LFS-dump Codeberg remote on revision `16-QPR1`; exact upstream LFS repository SHAs still need to be pinned.
+- Feature source: [Lunaris Singularity 16.2](https://github.com/Lunaris-AOSP/packages_apps_Singularity/tree/16.2)
+- [Project Infinity X manifest instructions](https://github.com/ProjectInfinity-X/manifest/tree/16-QPR1)
 - [LSPosed](https://github.com/LSPosed/LSPosed)
 
 ## Compatibility layer status
