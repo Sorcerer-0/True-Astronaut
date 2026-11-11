@@ -56,7 +56,9 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 - [x] Add a source-backed catalog covering all Settings screens and feature groups.
 - [x] Pin ProjectInfinity-X manifest branch `16-QPR1` and vendor baseline commit `f20a3edc17f69c04d33ad9c5015343bcf9e4ec46`.
 - [x] Identify `frameworks/base` and `packages/apps/Settings` as manifest-declared Codeberg LFS-dump projects on revision `16-QPR1`.
-- [ ] Resolve those two Codeberg repositories: public CI currently receives `repository not found` for `https://codeberg.org/LFS-dump/frameworks_base.git`; exact source SHAs remain unverified.
+- [x] Confirm the QPR1 manifest snippet uses the `LFS-dump` Codeberg remote for `frameworks/base` and `packages/apps/Settings` at revision `16-QPR1`.
+- [ ] Resolve and pin those Codeberg repositories: the GitHub connector cannot read the Codeberg host, so exact source SHAs remain unverified.
+- [x] Inspect the supplied X6831 Treble overlay reference (`Doze-off/vendor_hardware_overlay`, `Infinix/Hot30`).
 - [ ] Confirm the X6831-specific device tree/kernel/vendor baseline used for the current GSI build.
 - [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2. The ProjectInfinity-X manifest and vendor/SystemUI GitHub refs are pinned; the Codeberg framework/Settings projects are not publicly readable by the CI runner.
 
@@ -91,4 +93,4 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 
 ## Current status
 
-The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The next blocking requirement is the exact ProjectInfinity-X Android 16 QPR1 source baseline (manifest/repository revisions); without it, framework and SystemUI patches cannot be safely rebased or validated.
+The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The ProjectInfinity-X QPR1 manifest/vendor/SystemUI refs are identified, and the legacy Hot 30 overlay has been inventoried. Remaining blockers: exact Codeberg LFS SHAs for `frameworks/base` and `packages/apps/Settings`, plus the device-tree/kernel revisions used for the current GSI.
