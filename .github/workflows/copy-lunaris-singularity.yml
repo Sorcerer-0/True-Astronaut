@@ -31,7 +31,7 @@ jobs:
       - name: Copy complete source tree
         run: |
           mkdir -p vendor/lunaris/packages_apps_Singularity
-          cp -a lunaris-singularity/src /tmp/lunaris-singularity/res /tmp/lunaris-singularity/assets vendor/lunaris/packages_apps_Singularity/
+          cp -a lunaris-singularity/src lunaris-singularity/res lunaris-singularity/assets vendor/lunaris/packages_apps_Singularity/
           find vendor/lunaris/packages_apps_Singularity -type f | sort > /tmp/copied-files.txt
           echo "Copied files: $(wc -l < /tmp/copied-files.txt)"
           du -sh vendor/lunaris/packages_apps_Singularity
