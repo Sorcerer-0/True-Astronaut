@@ -7,7 +7,13 @@ This is a full-feature port, not a QS-only port and not a visual recreation. Eve
 - Settings source: https://github.com/Lunaris-AOSP/packages_apps_Singularity/tree/16.2
 - Framework/SystemUI source: https://github.com/Lunaris-AOSP/frameworks_base/tree/16.2
 - Target app/module: https://github.com/Sorcerer-0/True-Astronaut
+- Target platform manifest: https://github.com/ProjectInfinity-X/manifest/tree/16-QPR1
+- Target vendor source: https://github.com/ProjectInfinity-X/vendor_infinity/tree/16-QPR1
+- Target SystemUI shared libraries: https://github.com/ProjectInfinity-X/frameworks_libs_systemui/tree/16-QPR1
 - Target branch: port/lunaris-singularity-16.2
+- ProjectInfinity-X manifest commit: `91a7f7a4a8ff33ad0460c93541e9a0b5e4ecf8f8`
+- ProjectInfinity-X vendor commit: `f20a3edc17f69c04d33ad9c5015343bcf9e4ec46`
+- ProjectInfinity-X SystemUI shared library commit: `9ae1abbda48666f38de85b595ab908a18947767f`
 
 The same AOSP lineage is a strong compatibility advantage, but it does not make ROM-specific classes, resources, services, overlays, setting providers, vendor HALs, or privileged permissions identical. Port each feature's complete path: UI -> persisted config -> privileged bridge -> framework/SystemUI/service -> observable runtime state.
 
