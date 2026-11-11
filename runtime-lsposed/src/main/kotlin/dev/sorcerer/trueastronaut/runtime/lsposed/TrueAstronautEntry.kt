@@ -9,14 +9,14 @@ class TrueAstronautEntry : IXposedHookLoadPackage {
         when (lpparam.packageName) {
             APP_PACKAGE -> {
                 val installed = RestrictedSettingsReadableHook.install(lpparam.classLoader)
-                XposedBridge.log("TrueAstronaut: app Settings bridge \${if (installed) "installed" else "FAILED"}")
+                XposedBridge.log("TrueAstronaut: app Settings bridge ${if (installed) "installed" else "FAILED"}")
             }
             SYSTEM_UI_PACKAGE -> {
                 val probe = LegacyXposedRuntimeAdapter(lpparam.classLoader).probe()
                 val clock = StatusBarClockFeature.install(lpparam.classLoader)
                 XposedBridge.log(
-                    "TrueAstronaut: SystemUI runtimeAvailable=\${probe.available}; " +
-                        "clockFeature=\${clock}; runtime=\${probe.runtimeVersion ?: "unknown"}"
+                    "TrueAstronaut: SystemUI runtimeAvailable=${probe.available}; " +
+                        "clockFeature=${clock}; runtime=${probe.runtimeVersion ?: "unknown"}"
                 )
             }
         }
