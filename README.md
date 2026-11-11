@@ -72,3 +72,9 @@ The repository now contains a Gradle multi-module Android project with `:app`, `
 The upstream Singularity Settings source import is complete: 180 source files, 426 resource files, and 4 assets (610 total), with no missing or extra imported files at the current source revision. CI now verifies the imported tree against upstream before building the APKs. Static analysis of the supplied ProjectInfinity-X SystemUI APK is recorded in [the device audit](docs/device-audit/projectinfinity-x-systemui-static-analysis.md); it confirms native Battery Bar and Status Bar Clock implementations and their setting-key strings.
 
 The app-to-module configuration/status handshake is not implemented yet. Dashboard cards are UI scaffolding and are explicitly marked backend-pending. No functional Singularity feature hook, ROM-side platform patch, or device-tested release is claimed. The ProjectInfinity-X `16-QPR1` manifest, vendor, and SystemUI shared-library GitHub refs are now pinned. Its manifest points `frameworks/base` and `packages/apps/Settings` to Codeberg `LFS-dump`; public CI receives `repository not found` for those two URLs, so those exact source trees/SHAs and the locked manifest used for the current GSI build are still needed before native patches can safely be prepared.
+
+
+## Device reference
+
+- [Infinix Hot 30 Treble overlay audit](docs/device/infinix-hot30-overlay-reference.md)
+- [QPR1 platform source map](docs/porting/qpr1-platform-source-map.md)
