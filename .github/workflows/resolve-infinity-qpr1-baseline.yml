@@ -7,6 +7,7 @@ on:
       - port/lunaris-singularity-16.2
     paths:
       - '.github/workflows/resolve-infinity-qpr1-baseline.yml'
+      - 'docs/LUNARIS_FULL_PORT.md'
 
 permissions:
   contents: read
