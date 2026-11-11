@@ -15,6 +15,44 @@ permissions:
   contents: read
 
 jobs:
+  resolve-infinity-qpr1-baseline:
+    name: Resolve ProjectInfinity-X QPR1 source revisions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve ProjectInfinity-X GitHub repositories
+        shell: bash
+        run: |
+          set -euo pipefail
+          resolve_ref() {
+            local remote="$1" repo="$2" ref="$3"
+            local sha
+            sha="$(git ls-remote "https://${remote}/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
+            if [[ -z "$sha" ]]; then
+              echo "::error::Cannot resolve ${remote}/${repo} branch ${ref}"
+              return 1
+            fi
+            printf '%-46s %-12s %s\n' "${remote}/${repo}" "${ref}" "$sha"
+          }
+          resolve_ref github.com ProjectInfinity-X/manifest 16-QPR1
+          resolve_ref github.com ProjectInfinity-X/vendor_infinity 16-QPR1
+          resolve_ref github.com ProjectInfinity-X/frameworks_libs_systemui 16-QPR1
+      - name: Resolve Codeberg LFS-dump projects declared by Infinity manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          resolve_ref() {
+            local repo="$1" ref="$2"
+            local sha
+            sha="$(git ls-remote "https://codeberg.org/LFS-dump/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
+            if [[ -z "$sha" ]]; then
+              echo "::error::Cannot resolve Codeberg LFS-dump/${repo} branch ${ref}"
+              return 1
+            fi
+            printf '%-46s %-12s %s\n' "codeberg.org/LFS-dump/${repo}" "${ref}" "$sha"
+          }
+          resolve_ref frameworks_base 16-QPR1
+          resolve_ref packages_apps_Settings 16-QPR1
+
   verify-lunaris-source:
     name: Verify complete Lunaris source import
     runs-on: ubuntu-latest
