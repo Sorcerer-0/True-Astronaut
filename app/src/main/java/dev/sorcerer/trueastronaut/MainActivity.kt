@@ -73,8 +73,8 @@ private fun TrueAstronautDashboard(refreshToken: Int) {
         NativeToggle(NativeSystemSettings.BATTERY_BAR_BLEND_COLOR_REVERSE, "Reverse blend", "Reverse the native blend direction.")
     )
     val clockToggles = listOf(
-        NativeToggle(NativeSystemSettings.CLOCK_BOLD, "Bold clock", "Use the ROM's bold status-bar clock style."),
-        NativeToggle(NativeSystemSettings.CLOCK_SECONDS, "Show seconds", "Display seconds in the status-bar clock.")
+        NativeToggle(NativeSystemSettings.CLOCK_BOLD, "Bold clock", "Apply bold typeface to the SystemUI status-bar clock through LSPosed."),
+        NativeToggle(NativeSystemSettings.CLOCK_SECONDS, "Show seconds", "Add a live seconds counter to the SystemUI status-bar clock through LSPosed.")
     )
 
     fun reload() {
@@ -106,7 +106,7 @@ private fun TrueAstronautDashboard(refreshToken: Int) {
                 Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("Infinix Hot 30 (X6831)", style = MaterialTheme.typography.titleMedium)
-                        Text("Android 16 · ROM-native Settings.System backend", style = MaterialTheme.typography.bodySmall)
+                        Text("Android 16 · LSPosed runtime + InfinityX native controls", style = MaterialTheme.typography.bodySmall)
                         Text(
                             if (canWrite) "System settings access: granted" else "System settings access: required",
                             color = if (canWrite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
@@ -141,7 +141,7 @@ private fun TrueAstronautDashboard(refreshToken: Int) {
 
                 FeatureSection(
                     title = "Status Bar Clock",
-                    subtitle = "Uses the ROM's existing Clock implementation.",
+                    subtitle = "LSPosed hook on com.android.systemui.statusbar.policy.Clock.",
                     toggles = clockToggles,
                     values = values,
                     enabled = canWrite,
