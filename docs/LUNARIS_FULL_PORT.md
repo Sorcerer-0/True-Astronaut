@@ -55,9 +55,10 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 - [x] Verify the GitHub Actions import workflow and imported file counts.
 - [x] Add a source-backed catalog covering all Settings screens and feature groups.
 - [x] Pin ProjectInfinity-X manifest branch `16-QPR1` and vendor baseline commit `f20a3edc17f69c04d33ad9c5015343bcf9e4ec46`.
-- [x] Identify `frameworks/base` and `packages/apps/Settings` as external LFS-dump projects on revision `16-QPR1`; pin their exact SHAs before patching.
+- [x] Identify `frameworks/base` and `packages/apps/Settings` as manifest-declared Codeberg LFS-dump projects on revision `16-QPR1`.
+- [ ] Resolve those two Codeberg repositories: public CI currently receives `repository not found` for `https://codeberg.org/LFS-dump/frameworks_base.git`; exact source SHAs remain unverified.
 - [ ] Confirm the X6831-specific device tree/kernel/vendor baseline used for the current GSI build.
-- [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2.
+- [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2. The ProjectInfinity-X manifest and vendor/SystemUI GitHub refs are pinned; the Codeberg framework/Settings projects are not publicly readable by the CI runner.
 
 ### Phase 1 — Platform dependency map
 - [ ] Enumerate every Lunaris Settings source/resource reference and its target framework symbol.
