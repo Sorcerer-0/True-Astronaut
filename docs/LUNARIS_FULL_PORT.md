@@ -54,7 +54,7 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 - [x] Import the complete Singularity `src/`, `res/`, and `assets/` tree.
 - [x] Verify the GitHub Actions import workflow and imported file counts.
 - [x] Add a source-backed catalog covering all Settings screens and feature groups.
-- [ ] Pin the exact target ProjectInfinity-X Android 16 QPR1 QPR1 source manifest/commits.
+- [ ] Pin the exact target ProjectInfinity-X Android 16 QPR1 source manifest/commits.
 - [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2.
 
 ### Phase 1 — Platform dependency map
@@ -88,4 +88,4 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 
 ## Current status
 
-The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The next blocking requirement is the exact ProjectInfinity-X Android 16 QPR1 QPR1 source baseline (manifest/repository revisions); without it, framework and SystemUI patches cannot be safely rebased or validated.
+The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The next blocking requirement is the exact ProjectInfinity-X Android 16 QPR1 source baseline (manifest/repository revisions); without it, framework and SystemUI patches cannot be safely rebased or validated.
