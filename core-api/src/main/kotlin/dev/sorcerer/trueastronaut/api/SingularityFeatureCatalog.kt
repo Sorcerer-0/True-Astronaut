@@ -42,7 +42,7 @@ object SingularityFeatureCatalog {
         feature("buttons", "Buttons", SingularityArea.BUTTONS, "lunaris_settings_button.xml",
             "org/lunaris/settings/fragments/buttons/Buttons.java"),
         feature("button-backlight", "Button backlight brightness", SingularityArea.BUTTONS,
-            "haptics_settings.xml", "org/lunaris/settings/fragments/buttons/ButtonBacklightBrightness.java"),
+            "lunaris_settings_button.xml", "org/lunaris/settings/fragments/buttons/ButtonBacklightBrightness.java"),
         feature("power-menu", "Power menu", SingularityArea.BUTTONS, "power_menu.xml",
             "org/lunaris/settings/fragments/buttons/PowerMenuActions.java"),
         feature("power-menu-actions", "Power menu actions", SingularityArea.BUTTONS,
