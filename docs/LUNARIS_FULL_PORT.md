@@ -61,7 +61,7 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 - [x] Inspect the supplied X6831 Treble overlay reference (`Doze-off/vendor_hardware_overlay`, `Infinix/Hot30`).
 - [x] Record QPR1 source map and clarify target `packages/SystemUI` is in the manifest-declared `frameworks/base` project, not the separate shared SystemUI libraries repository.
 - [ ] Confirm the X6831-specific device tree/kernel/vendor baseline used for the current GSI build.
-- [ ] Compare the target Settings and `frameworks/base` (including `packages/SystemUI`) trees with Lunaris 16.2 after the LFS-dump SHAs are resolved. `frameworks/libs/systemui` is a separate Infinity repository at `16-QPR1`; it is not the main SystemUI implementation.
+- [ ] Compare the target Settings and `frameworks/base` (including `packages/SystemUI`) trees with Lunaris 16.2 after access to the LFS-dump repositories is restored. `frameworks/libs/systemui` is a separate Infinity repository at `16-QPR1`; it is not the main SystemUI implementation.
 
 ### Phase 1 — Platform dependency map
 - [ ] Enumerate every Lunaris Settings source/resource reference and its target framework symbol.
@@ -94,4 +94,4 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 
 ## Current status
 
-The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The ProjectInfinity-X QPR1 manifest/vendor/SystemUI refs are identified, and the legacy Hot 30 overlay has been inventoried. Remaining blockers: exact Codeberg LFS-dump SHAs for `frameworks_base` and `packages_apps_Settings`, plus the device-tree/kernel revisions used for the current GSI. The QPR1 manifest snippet confirms their remote and revision, but the SHAs still need CI resolution.
+The upstream source import and catalog are complete. The imported tree is verified against the current upstream `16.2` revision by CI. **No claim is made that the platform integration, ROM build, or runtime feature port is complete.** The ProjectInfinity-X QPR1 manifest/vendor/SystemUI refs are identified, and the legacy Hot 30 overlay has been inventoried. Remaining blockers: the manifest-declared Codeberg repositories `LFS-dump/frameworks_base` and `LFS-dump/packages_apps_Settings` are not publicly resolvable from CI (`remote: Not found`), so target source code and SHAs are unavailable. The device-tree/kernel revisions used for the current GSI are also not pinned. No Settings/framework/SystemUI integration patch has been generated; creating one without the actual target trees would risk producing incorrect or non-applicable changes.
