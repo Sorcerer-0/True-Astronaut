@@ -1,17 +1,52 @@
-name: Android build
+name: Android build and upstream source verification
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - port/lunaris-singularity-16.2
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - port/lunaris-singularity-16.2
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
+  verify-lunaris-source:
+    name: Verify complete Lunaris source import
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout True Astronaut
+        uses: actions/checkout@v4
+
+      - name: Checkout upstream Lunaris Singularity 16.2
+        uses: actions/checkout@v4
+        with:
+          repository: Lunaris-AOSP/packages_apps_Singularity
+          ref: 16.2
+          path: upstream-singularity
+
+      - name: Verify imported source, resources, and assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          imported="vendor/lunaris/packages_apps_Singularity"
+          test -d "$imported/src"
+          test -d "$imported/res"
+          test -d "$imported/assets"
+          diff -qr upstream-singularity/src "$imported/src"
+          diff -qr upstream-singularity/res "$imported/res"
+          diff -qr upstream-singularity/assets "$imported/assets"
+          upstream_count="$(find upstream-singularity/src upstream-singularity/res upstream-singularity/assets -type f | wc -l)"
+          imported_count="$(find "$imported/src" "$imported/res" "$imported/assets" -type f | wc -l)"
+          test "$upstream_count" -eq "$imported_count"
+          echo "Verified identical upstream import: $imported_count files"
+
   assemble:
+    name: Build companion app and LSPosed adapter
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
