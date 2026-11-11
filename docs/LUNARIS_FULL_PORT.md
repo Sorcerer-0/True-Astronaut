@@ -59,6 +59,7 @@ Therefore, copying these classes into the existing Gradle companion app or wrapp
 - [x] Confirm the QPR1 manifest snippet uses the `LFS-dump` Codeberg remote for `frameworks/base` and `packages/apps/Settings` at revision `16-QPR1`.
 - [ ] Resolve and pin those Codeberg repositories: the GitHub connector cannot read the Codeberg host, so exact source SHAs remain unverified.
 - [x] Inspect the supplied X6831 Treble overlay reference (`Doze-off/vendor_hardware_overlay`, `Infinix/Hot30`).
+- [x] Record QPR1 source map and clarify target `packages/SystemUI` is in the manifest-declared `frameworks/base` project, not the separate shared SystemUI libraries repository.
 - [ ] Confirm the X6831-specific device tree/kernel/vendor baseline used for the current GSI build.
 - [ ] Compare the target Settings, frameworks/base, SystemUI and SettingsLib trees with Lunaris 16.2. The ProjectInfinity-X manifest and vendor/SystemUI GitHub refs are pinned; the Codeberg framework/Settings projects are not publicly readable by the CI runner.
 
