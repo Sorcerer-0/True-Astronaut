@@ -1,22 +1,14 @@
 package dev.sorcerer.trueastronaut.api
 
-/**
- * Framework-neutral boundary between True Astronaut features and a hook runtime.
- *
- * Implementations belong in isolated adapter modules. Feature modules must not
- * depend on LSPosed/Xposed/other framework APIs directly.
- */
 interface RuntimeAdapter {
     val id: String
     val displayName: String
 
-    /** Detect whether this adapter can operate in the current process/runtime. */
     fun probe(): RuntimeProbe
 
-    /** Install one hook through this runtime. Must be idempotent per hookId. */
-    fun install(request: HookRequest): HookInstallResult
+    /** Install a hook. Implementations must make repeated hookId installs idempotent. */
+    fun install(request: HookRequest, callback: HookCallback): HookInstallResult
 
-    /** Remove a previously installed hook when the runtime supports it. */
     fun uninstall(hookId: String): HookInstallResult
 }
 
@@ -32,8 +24,22 @@ data class HookRequest(
     val processName: String,
     val targetClass: String,
     val targetMethod: String,
+    val parameterTypeNames: List<String> = emptyList(),
     val requiredFeature: FeatureId
 )
+
+interface HookCallback {
+    fun before(invocation: HookInvocation) = Unit
+    fun after(invocation: HookInvocation) = Unit
+}
+
+/** Framework-neutral view of a method-hook invocation. */
+interface HookInvocation {
+    val receiver: Any?
+    val arguments: MutableList<Any?>
+    var result: Any?
+    var throwable: Throwable?
+}
 
 sealed interface HookInstallResult {
     data object Installed : HookInstallResult
