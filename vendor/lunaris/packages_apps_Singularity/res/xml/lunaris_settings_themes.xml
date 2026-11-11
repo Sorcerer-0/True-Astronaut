@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024-2026 Lunaris AOSP -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/themes_title">
+
+    <PreferenceCategory
+        android:key="ui_category"
+        android:title="@string/ui_title">
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="oneui_collapsing_toolbar"
+            android:title="@string/oneui_collapsing_toolbar_title"
+            android:summary="@string/oneui_collapsing_toolbar_summary"
+            android:defaultValue="false" />
+
+        <!-- QuickSwitch -->
+        <Preference
+            android:key="quickswitch"
+            android:title="@string/quickswitch_launcher_title" 
+            android:summary="@string/quickswitch_launcher_summary" 
+            android:fragment="org.lunaris.settings.fragments.miscellaneous.QuickSwitch" />
+
+        <!-- Themes -->
+        <Preference
+            android:key="custom_system_theme"
+            android:title="@string/custom_system_theme_title"
+            android:summary="@string/custom_system_theme_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.axion.axthemestore"
+                android:targetClass="com.android.axion.axthemestore.MainActivity" />
+        </Preference>
+
+        <!-- Monet Theme Engine -->
+        <Preference
+            android:key="monet_settings"
+            android:title="@string/monet_settings_title"
+            android:summary="@string/monet_settings_summary"
+            >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="org.lunaris.monet"
+                android:targetClass="org.lunaris.monet.MainActivity" />
+        </Preference>
+
+        <!-- Gradient Customization -->
+        <Preference
+            android:key="gradient_settings"
+            android:title="@string/gradient_settings_title"
+            android:summary="@string/gradient_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.GradientSettings" />
+            
+        <!-- Font style -->
+        <Preference
+            android:key="font_settings"
+            android:title="@string/font_settings_title"
+            android:summary="@string/font_settings_summary"
+            >
+            <intent
+                android:action="com.android.axion.axthemestore.action.FONTS"
+                android:targetPackage="com.android.axion.axthemestore"
+                android:targetClass="com.android.axion.axthemestore.MainActivity" />
+        </Preference>
+
+        <!-- Ambient Display -->
+        <Preference
+            android:key="doze_fragment"
+            android:title="@string/doze_display_title"
+            android:summary="@string/doze_display_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.DozeSettings" />
+
+        <!-- Ambient Wallpaper -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="doze_always_on_wallpaper_enabled"
+            android:title="@string/doze_always_on_wallpaper_title"
+            android:summary="@string/doze_always_on_wallpaper_summary"
+            android:defaultValue="@*android:bool/config_dozeSupportsAodWallpaper" />
+
+        <!-- Ambient Music Ticker -->
+        <org.lunaris.settings.preferences.SecureSettingSwitchPreference
+            android:key="pulse_on_new_tracks"
+            android:title="@string/pulse_on_new_tracks_title"
+            android:summary="@string/pulse_on_new_tracks_summary" />
+
+        <!-- Edge Light -->
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="edge_light_enabled"
+            android:title="@string/edge_light_title"
+            android:summary="@string/edge_light_summary"
+            android:defaultValue="false"
+            android:fragment="org.lunaris.settings.fragments.themes.EdgeLightSettings" />
+
+        <org.lunaris.settings.preferences.SecureSettingListPreference
+            android:key="package_installer_style"
+            android:title="@string/package_installer_style_title"
+            android:dialogTitle="@string/package_installer_style_title"
+            android:entries="@array/package_installer_style_entries"
+            android:entryValues="@array/package_installer_style_values"
+            android:defaultValue="1"
+            android:summary="%s" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="volume_category"
+        android:title="@string/volume_category">
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="volume_dialog_type"
+            android:title="@string/volume_dialog_type_title"
+            android:summary="%s"
+            android:entries="@array/volume_dialog_type_entries"
+            android:entryValues="@array/volume_dialog_type_values"
+            android:defaultValue="0" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="show_volume_percentage"
+            android:title="@string/show_volume_percentage_title"
+            android:summary="@string/show_volume_percentage_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="compose_volume_style"
+            android:title="@string/compose_volume_style_title"
+            android:summary="%s"
+            android:entries="@array/compose_volume_style_entries"
+            android:entryValues="@array/compose_volume_style_values"
+            android:defaultValue="2" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="video_wallpaper_category"
+        android:title="@string/video_wallpaper_category">
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="wallpaper_zoom_enabled"
+            android:title="@string/wallpaper_zoom_title"
+            android:summary="@string/wallpaper_zoom_summary"
+            android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.SystemSettingPrimarySwitchPreference
+            android:key="lock_glymps_enabled"
+            android:title="@string/lock_glymps_title"
+            android:summary="@string/lock_glymps_enable_summary"
+            android:defaultValue="false"
+            android:fragment="org.lunaris.settings.fragments.themes.LockGlympsSettings" />
+
+        <Preference
+            android:key="video_wallpaper"
+            android:title="@string/video_wallpaper_category_title"
+            android:summary="@string/video_wallpaper_category_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.VideoWallpaperFragment" />
+
+        <Preference
+            android:key="wallpaper_settings"
+            android:title="@string/wallpaper_settings_title"
+            android:summary="@string/wallpaper_settings_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.Wallpaper" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="lock_screen_charging_category"
+        android:title="@string/lock_screen_charging_category">
+
+        <!-- Charging animation -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="charging_animation"
+            android:title="@string/charging_animation_title"
+            android:summary="@string/charging_animation_summary"
+            android:defaultValue="true" />
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="wireless_charging_ripple_shape"
+            android:title="@string/ripple_shape_title"
+            android:summary="%s"
+            android:entries="@array/ripple_shape_entries"
+            android:entryValues="@array/ripple_shape_values"
+            android:defaultValue="0" />
+
+        <!-- Dynamic charging animation -->
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="wireless_charging_dynamic_color"
+            android:title="@string/wireless_charging_dynamic_color_title"
+            android:summary="@string/wireless_charging_dynamic_color_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="charging_animation_settings"
+            android:title="@string/charging_effect_title"
+            android:summary="@string/charging_effect_summary"
+            android:fragment="org.lunaris.settings.fragments.themes.ChargingAnimationSettings" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="extras_category"
+        android:title="@string/extras_category">
+
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="system_animation_style"
+            android:title="@string/system_animation_style_title"
+            android:dialogTitle="@string/system_animation_style_title"
+            android:entries="@array/system_animation_styles_entries"
+            android:entryValues="@array/system_animation_styles_values"
+            android:defaultValue="0"
+            android:summary="%s" />
+
+        <org.lunaris.settings.preferences.GlobalSettingSwitchPreference
+            android:key="lunaris_luminous_animations"
+            android:title="@string/luminous_animations_title"
+            android:summary="@string/luminous_animations_summary"
+            android:defaultValue="true" />
+
+        <!-- Display Cutout -->
+        <Preference
+            android:key="display_cutout_force_fullscreen_settings"
+            android:title="@string/display_cutout_force_fullscreen_title"
+            android:summary="@string/display_cutout_force_fullscreen_summary">
+            <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="org.lunaris.settings.fragments.themes.DisplayCutoutForceFullscreenActivity"/>
+        </Preference>
+
+        <!-- Screen on animation -->
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="lockscreen_unlock_animation"
+            android:title="@string/lockscreen_unlock_animation_title"
+            android:entries="@array/lockscreen_unlock_animation_entries"
+            android:entryValues="@array/lockscreen_unlock_animation_values"
+            android:defaultValue="0" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_unlock_effect_hfr"
+            android:title="@string/lockscreen_unlock_effect_hfr_title"
+            android:summary="@string/lockscreen_unlock_effect_hfr_summary"
+            android:defaultValue="false" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_water_ripple_fullscreen"
+            android:title="@string/lockscreen_water_ripple_fullscreen_title"
+            android:summary="@string/lockscreen_water_ripple_fullscreen_summary"
+            android:defaultValue="false" />
+
+        <!-- Screen Off animation -->
+        <org.lunaris.settings.preferences.SystemSettingListPreference
+            android:key="screen_off_animation"
+            android:title="@string/screen_off_animation_title"
+            android:dialogTitle="@string/screen_off_animation_title"
+            android:entries="@array/screen_off_animation_entries"
+            android:entryValues="@array/screen_off_animation_values"
+            android:defaultValue="0" />
+
+        <!-- Smart Pixels -->
+        <org.lunaris.settings.preferences.SecureSettingPrimarySwitchPreference
+            android:key="smart_pixel_filter_enabled"
+            android:title="@string/smart_pixels_title" 
+            android:summary="@string/smart_pixels_summary" 
+            android:defaultValue="false"
+            android:fragment="org.lunaris.settings.fragments.themes.SmartPixels" />
+
+        <org.lunaris.settings.preferences.SystemSettingSwitchPreference
+            android:key="compose_homepage_enabled"
+            android:title="@string/compose_homepage_title"
+            android:summary="@string/compose_homepage_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="settings_scroll_bounce"
+            android:title="@string/settings_scroll_bounce_title"
+            android:summary="@string/settings_scroll_bounce_summary"
+            android:fragment="com.android.settings.display.ScrollBounceSettings" />
+
+        <org.lunaris.settings.preferences.OverlaySwitchPreference
+            android:key="com.android.settingslib.smileswitch"
+            android:title="@string/smile_switch_title"
+            android:summary="@string/smile_switch_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

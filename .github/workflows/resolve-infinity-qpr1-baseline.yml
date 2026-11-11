@@ -1,0 +1,52 @@
+name: Resolve ProjectInfinity-X QPR1 source baseline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - port/lunaris-singularity-16.2
+    paths:
+      - '.github/workflows/resolve-infinity-qpr1-baseline.yml'
+      - 'docs/LUNARIS_FULL_PORT.md'
+
+permissions:
+  contents: read
+
+jobs:
+  resolve-source-refs:
+    name: Resolve manifest-declared upstream refs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve ProjectInfinity-X GitHub refs
+        shell: bash
+        run: |
+          set -euo pipefail
+          resolve_github() {
+            local repo="$1" ref="$2"
+            local sha
+            sha="$(git ls-remote "https://github.com/ProjectInfinity-X/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
+            if [[ -z "$sha" ]]; then
+              echo "::error::Could not resolve ProjectInfinity-X/${repo} branch ${ref}"
+              return 1
+            fi
+            printf '%-34s %-12s %s\n' "$repo" "$ref" "$sha"
+          }
+          resolve_github manifest 16-QPR1
+          resolve_github vendor_infinity 16-QPR1
+          resolve_github frameworks_libs_systemui 16-QPR1
+      - name: Resolve Codeberg LFS-dump refs from manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          resolve_codeberg() {
+            local repo="$1" ref="$2"
+            local sha
+            sha="$(git ls-remote "https://codeberg.org/LFS-dump/${repo}.git" "refs/heads/${ref}" | awk 'NR==1 {print $1}')"
+            if [[ -z "$sha" ]]; then
+              echo "::error::Could not resolve Codeberg LFS-dump/${repo} branch ${ref}"
+              return 1
+            fi
+            printf '%-34s %-12s %s\n' "$repo" "$ref" "$sha"
+          }
+          resolve_codeberg frameworks_base 16-QPR1
+          resolve_codeberg packages_apps_Settings 16-QPR1

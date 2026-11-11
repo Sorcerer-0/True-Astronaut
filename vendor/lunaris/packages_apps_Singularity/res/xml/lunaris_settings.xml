@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/lunaris_dashboard_title">
+
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:key="singularity_one_category">
+
+    <!-- Themes -->
+    <Preference
+        android:key="themes"
+        android:title="@string/themes_title"
+        android:summary="@string/themes_summary"
+        android:icon="@drawable/ic_lunaris_themes"
+        android:fragment="org.lunaris.settings.fragments.themes.Themes" />
+    
+    <!-- Quick settings -->
+    <Preference
+        android:key="quick_settings"
+        android:title="@string/quick_settings_title"
+        android:summary="@string/quick_settings_summary"
+        android:icon="@drawable/ic_lunaris_quick_settings"
+        android:fragment="org.lunaris.settings.fragments.quicksettings.QuickSettings" />
+
+    <!-- Notifications -->
+    <Preference
+        android:key="notifications"
+        android:title="@string/notifications_title"
+        android:summary="@string/notifications_summary"
+        android:icon="@drawable/ic_homepage_notification"
+        android:fragment="org.lunaris.settings.fragments.notifications.Notifications" />
+
+    <!-- Lock screen -->
+    <Preference
+        android:key="lock_screen"
+        android:title="@string/lock_screen_title"
+        android:summary="@string/lock_screen_summary"
+        android:icon="@drawable/ic_lunaris_lock_screen"
+        android:fragment="org.lunaris.settings.fragments.lockscreen.LockScreen" />
+
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
+
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:key="singularity_two_category">
+
+        <!-- Status bar -->
+        <Preference
+            android:key="status_bar"
+            android:title="@string/status_bar_title"
+            android:summary="@string/status_bar_summary"
+            android:icon="@drawable/ic_lunaris_status_bar"
+            android:fragment="org.lunaris.settings.fragments.statusbar.StatusBar" />
+
+        <!-- Miscellaneous -->
+        <Preference
+            android:key="miscellaneous"
+            android:title="@string/miscellaneous_title"
+            android:summary="@string/miscellaneous_summary"
+            android:icon="@drawable/ic_lunaris_miscellaneous"
+            android:fragment="org.lunaris.settings.fragments.miscellaneous.Miscellaneous" />
+
+        <!-- Power menu -->
+        <Preference
+            android:key="buttons"
+            android:title="@string/buttons_title"
+            android:summary="@string/buttons_summary"
+            android:icon="@drawable/ic_lunaris_power_menu"
+            android:fragment="org.lunaris.settings.fragments.buttons.Buttons" />
+
+        <!-- Sound -->
+        <Preference
+            android:key="sound"
+            android:title="@string/sound_title"
+            android:summary="@string/sound_summary"
+            android:icon="@drawable/ic_homepage_sound"
+            android:fragment="org.lunaris.settings.fragments.sound.Sound" />
+            
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
+
+</PreferenceScreen>
