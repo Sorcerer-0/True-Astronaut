@@ -54,6 +54,8 @@ The audit's reported fingerprint strings still identify the underlying Infinix A
 - [Lunaris Android 16 manifest](https://github.com/Lunaris-AOSP/android/tree/16.2)
 - [LSPosed](https://github.com/LSPosed/LSPosed)
 
-## Development status
+## Compatibility layer status
 
-Repository initialization. No functional feature hook, app release, or flashable build is claimed yet. Android 16 LSPosed runtime compatibility must be verified on this exact ROM/device before depending on it.
+A framework-neutral Kotlin API foundation now exists under `core-api/`. It defines runtime adapter, hook request, feature backend, capability/status contracts, a feature registry, and runtime selection. Architecture and provisional feature-backend policy are documented under `docs/architecture/`.
+
+This is not yet a complete Android Gradle project, a functional LSPosed adapter, or an installable APK/module. No functional feature hook or flashable release is claimed. The next steps are to add the Android app/module build, implement the LSPosed adapter behind `RuntimeAdapter`, establish a safe app-to-hook configuration transport, and test runtime compatibility on ProjectInfinity-X Android 16 on X6831.
