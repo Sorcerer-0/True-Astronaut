@@ -1,6 +1,7 @@
 name: Copy Lunaris Singularity 16.2 source
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - port/lunaris-singularity-16.2
