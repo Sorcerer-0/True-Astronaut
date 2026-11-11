@@ -5,8 +5,8 @@ import android.provider.Settings
 
 /**
  * ProjectInfinity-X native settings backend.
- * Only boolean keys with observed 0/1 values are exposed as switches.
- * Enum and color keys remain hidden until accepted values are confirmed.
+ * Reads of ROM-hidden keys are enabled only by the narrowly scoped LSPosed
+ * readable-key hook. Without that hook, SecurityException is handled safely.
  */
 object NativeSystemSettings {
     const val BATTERY_BAR_ENABLED = "statusbar_battery_bar"
@@ -20,18 +20,30 @@ object NativeSystemSettings {
     fun canWrite(context: Context): Boolean = Settings.System.canWrite(context)
 
     fun readBoolean(context: Context, key: String): Boolean? {
-        val raw = Settings.System.getString(context.contentResolver, key) ?: return null
-        return when (raw) {
-            "0" -> false
-            "1" -> true
-            else -> null
+        return try {
+            val raw = Settings.System.getString(context.contentResolver, key) ?: return null
+            when (raw) {
+                "0" -> false
+                "1" -> true
+                else -> null
+            }
+        } catch (_: SecurityException) {
+            null
         }
     }
 
     fun writeBoolean(context: Context, key: String, enabled: Boolean): Boolean {
         if (!canWrite(context)) return false
-        val written = Settings.System.putInt(context.contentResolver, key, if (enabled) 1 else 0)
-        if (!written) return false
-        return readBoolean(context, key) == enabled
+
+        return try {
+            val written = Settings.System.putInt(
+                context.contentResolver,
+                key,
+                if (enabled) 1 else 0
+            )
+            written && readBoolean(context, key) == enabled
+        } catch (_: SecurityException) {
+            false
+        }
     }
 }
