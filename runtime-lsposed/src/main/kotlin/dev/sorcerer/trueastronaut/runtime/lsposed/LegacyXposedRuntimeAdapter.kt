@@ -114,6 +114,16 @@ class LegacyXposedRuntimeAdapter(
                 hookParam.args[index] = element
                 return previous
             }
+
+            override fun add(index: Int, element: Any?) {
+                // Xposed argument arrays have a fixed length; insertion is unsupported.
+                throw UnsupportedOperationException("Hook argument count cannot be changed")
+            }
+
+            override fun removeAt(index: Int): Any? {
+                // Xposed argument arrays have a fixed length; removal is unsupported.
+                throw UnsupportedOperationException("Hook argument count cannot be changed")
+            }
         }
 
         return object : HookInvocation {
