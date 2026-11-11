@@ -44,3 +44,14 @@ Other feature work is spread across framework core/resources, SystemUI, Settings
 
 ## Current completeness
 This document is a source map and dependency audit starter, not a claim that the full Lunaris feature set has been ported.
+
+
+## QPR1 comparison status (source-tree inspection)
+The Lunaris framework source exposes a non-trivial QS implementation surface under `packages/SystemUI/src/com/android/systemui/qs/panels/`:
+- `data/`, `domain/`, `shared/`, `ui/` and `widgets/` subtrees.
+- Custom widget Binder interfaces and host/service classes under `widgets/`.
+- Additional custom QS repository/settings classes are in this platform tree and must be compared with the target `frameworks/base/packages/SystemUI` at the exact pinned LFS revision.
+
+The ProjectInfinity-X `frameworks/libs/systemui` repository is separate shared UI libraries and does not contain `packages/SystemUI`. The correct target for these changes is the `frameworks/base` LFS project.
+
+The current GitHub connector cannot access the Codeberg LFS remote. Therefore no truthful file-by-file target diff or build-ready framework patch can be prepared from the public GitHub refs alone. Do not copy Lunaris's complete `packages/SystemUI` directory wholesale: it contains a large Android platform tree and depends on AOSP base revisions, Dagger bindings, resource IDs, SettingsProvider contracts and feature-specific APIs.
