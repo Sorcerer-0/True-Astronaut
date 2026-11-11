@@ -1,0 +1,48 @@
+name: Copy Lunaris Singularity 16.2 source
+
+on:
+  push:
+    branches:
+      - port/lunaris-singularity-16.2
+    paths:
+      - .github/workflows/copy-lunaris-singularity.yml
+
+permissions:
+  contents: write
+
+jobs:
+  copy-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout True Astronaut target branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Checkout Lunaris Singularity 16.2
+        uses: actions/checkout@v4
+        with:
+          repository: Lunaris-AOSP/packages_apps_Singularity
+          ref: 16.2
+          path: /tmp/lunaris-singularity
+
+      - name: Copy complete source tree
+        run: |
+          mkdir -p vendor/lunaris/packages_apps_Singularity
+          cp -a /tmp/lunaris-singularity/src /tmp/lunaris-singularity/res /tmp/lunaris-singularity/assets vendor/lunaris/packages_apps_Singularity/
+          find vendor/lunaris/packages_apps_Singularity -type f | sort > /tmp/copied-files.txt
+          echo "Copied files: $(wc -l < /tmp/copied-files.txt)"
+          du -sh vendor/lunaris/packages_apps_Singularity
+
+      - name: Commit copied source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vendor/lunaris/packages_apps_Singularity
+          if git diff --cached --quiet; then
+            echo "No source changes to commit."
+            exit 0
+          fi
+          git commit -m "Import complete Lunaris Singularity 16.2 source"
+          git push origin HEAD:${{ github.ref_name }}
