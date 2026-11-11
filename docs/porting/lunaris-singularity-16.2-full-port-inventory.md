@@ -2,7 +2,7 @@
 
 ## Scope and source of truth
 
-This is a full-feature port, not a QS-only port and not a visual recreation. Every feature present in the Lunaris Singularity 16.2 source tree is in scope for True Astronaut on ProjectInfinity-X Android 16 / Infinix X6831.
+This is a full-feature port, not a QS-only port and not a visual recreation. Every feature present in the Lunaris Singularity 16.2 source tree is in scope for True Astronaut on ProjectInfinity-X Android 16 QPR1 QPR1 (API 36) / Infinix X6831.
 
 - Settings source: https://github.com/Lunaris-AOSP/packages_apps_Singularity/tree/16.2
 - Framework/SystemUI source: https://github.com/Lunaris-AOSP/frameworks_base/tree/16.2
@@ -66,7 +66,7 @@ A privilege request is not proof of effective access. Every backend must verify 
 
 ### Phase 0 — source and target audit
 - Finish recursive source inventory, settings-key extraction, permission/API mapping and asset/license inventory.
-- Compare each Singularity consumer with the corresponding ProjectInfinity-X Android 16 implementation.
+- Compare each Singularity consumer with the corresponding ProjectInfinity-X Android 16 QPR1 QPR1 implementation.
 - Inspect the X6831 sensor, display, backlight, biometric and vendor service capabilities before enabling hardware-dependent features.
 
 ### Phase 1 — foundation
@@ -99,7 +99,7 @@ A privilege request is not proof of effective access. Every backend must verify 
 - Mapped: source behavior and target consumer/API identified.
 - Implemented: code exists in True Astronaut or required ROM patch.
 - Built: relevant APK/ROM target compiles.
-- Device-tested: behavior verified on ProjectInfinity-X Android 16 / X6831.
+- Device-tested: behavior verified on ProjectInfinity-X Android 16 QPR1 QPR1 (API 36) / X6831.
 - Complete: all required states, persistence, failure handling and rollback verified.
 
 Never call a feature "ported" merely because its screen or toggle exists.
