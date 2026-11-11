@@ -21,6 +21,10 @@ The ProjectInfinity-X QPR1 manifest snippet explicitly declares:
 
 Therefore the GitHub org's vendor tree alone is not the correct patch target for Settings, framework and SystemUI features.
 
+## QPR1 shared SystemUI library note
+
+The pinned ProjectInfinity-X `frameworks/libs/systemui` repository is an AOSP shared UI library (animationlib, ambientlib, aconfig, etc.); it is not the `packages/SystemUI` implementation tree. The `packages/SystemUI` feature implementations still reside under the manifest-declared `frameworks/base` project. Do not treat `frameworks_libs_systemui` as the SystemUI patch target.
+
 ## Lunaris framework-level additions identified
 The Lunaris framework tree contains custom support for the QS header image and lockscreen widgets, including:
 - `core/java/com/android/internal/util/lunaris/QsHeaderImageGeometry.java`
