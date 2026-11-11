@@ -84,8 +84,8 @@ The target device is Infinix Hot 30 X6831 / MT6768. Treat device-dependent featu
 - [x] Confirmed ProjectInfinity-X QPR1 manifest and its project remotes.
 - [x] Confirmed Lunaris 16.2 native implementation roots and major feature classes.
 - [x] Added CI job to resolve exact target GitHub and Codeberg branch SHAs.
-- [ ] Obtain resolved Codeberg SHAs from CI.
-- [ ] Obtain the exact locked manifest used for the current GSI build.
+- [ ] Obtain resolved Codeberg SHAs from CI; the first public CI probe returned `repository not found` for `LFS-dump/frameworks_base`, so the remote may be private or the repo path may need maintainer confirmation.
+- [ ] Obtain the exact locked manifest used for the current GSI build (`repo manifest -r`) and the accessible Codeberg source URLs or exported source snapshots.
 - [ ] Apply native platform patches and run platform build/tests.
 
 No feature is marked implemented or device-tested by this inventory alone.
